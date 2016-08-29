@@ -4,11 +4,41 @@ case $1 in
 
 	dev)
  		cd /src
+
+		rm -rf /src/public/index.html
+		touch /src/public/index.html
+		cat /src/html/indexStart.html >> /src/public/index.html
+		cat /src/html/headStart.html >> /src/public/index.html
+		for file in /src/components/*.html ; do
+			cat "$file" >> /src/public/index.html
+		done
+		cat /src/html/headEnd.html >> /src/public/index.html
+		cat /src/html/bodyStart.html >> /src/public/index.html
+		cat /src/html/app.html >> /src/public/index.html
+		cat /src/html/appjs.html >> /src/public/index.html
+		cat /src/html/bodyEnd.html >> /src/public/index.html
+		cat /src/html/indexEnd.html >> /src/public/index.html
+
 		npm install
 		npm start &
 		ps -ef
 
 		while inotifywait -e modify /src --recursive --exclude "npm-debug.log"; do
+
+			rm -rf /src/public/index.html
+			touch /src/public/index.html
+			cat /src/html/indexStart.html >> /src/public/index.html
+			cat /src/html/headStart.html >> /src/public/index.html
+			for file in /src/components/*.html ; do
+				cat "$file" >> /src/public/index.html
+			done
+			cat /src/html/headEnd.html >> /src/public/index.html
+			cat /src/html/bodyStart.html >> /src/public/index.html
+			cat /src/html/app.html >> /src/public/index.html
+			cat /src/html/appjs.html >> /src/public/index.html
+			cat /src/html/bodyEnd.html >> /src/public/index.html
+			cat /src/html/indexEnd.html >> /src/public/index.html
+
 			killall -9 node
 			npm start &
 			ps ef

@@ -1,6 +1,6 @@
 #!/bin/sh
 
 cd sv
-git clone https://github.com/freiny/koderkave-fe.git
-mv ./koderkave-fe repo
-cd ..
+&& git clone https://github.com/freiny/koderkave-fe.git
+&& mv ./koderkave-fe repo
+&& cd ..

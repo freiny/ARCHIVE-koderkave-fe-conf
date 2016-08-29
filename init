@@ -2,8 +2,6 @@
 # USAGE: init [dev | prod]
 
 source ./clean
-
-# Clone Repos
 source ./clone
 
 # Build and Run Docker Images/Containers
