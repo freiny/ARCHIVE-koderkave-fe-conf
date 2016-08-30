@@ -29,5 +29,6 @@ docker rmi "$imagePrefix"_be1:latest
 docker rmi "$imagePrefix"_be2:latest
 docker rmi "$imagePrefix"_be3:latest
 
-rm -rf ./fe/repo
-rm -rf ./be/repo
+rm -rf ./sv/repo
+rm -rf ./sv/koderkave-fe
+rm -rf ./sv/koderkave-be
