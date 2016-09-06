@@ -1,0 +1,3 @@
+#!/bin/sh
+cd deploy
+docker-compose --file prod.yml up

@@ -1,0 +1,4 @@
+#!/bin/sh
+rm deploy.tar.gz
+tar -czvf deploy.tar.gz ./
+ec2deploy

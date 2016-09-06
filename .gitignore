@@ -85,3 +85,6 @@ gin-bin
 ####################################################
 # Cloned-Down Repos
 repo
+
+# Deployment Archive
+deploy.tar.gz

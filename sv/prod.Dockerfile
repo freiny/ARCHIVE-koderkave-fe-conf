@@ -6,7 +6,8 @@ ADD home/init /home/init
 ADD repo/src /src
 
 ENV APP_ENVIRONMENT prod
-ENV HTTP_PORT_BACKEND 80
+ENV FRONTEND koderkat.com:80
+ENV BACKEND api.koderkat.com:8080
 ENV HTTP_PORT 10000
 EXPOSE 10000
 

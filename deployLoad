@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm -rf deploy
+mkdir deploy
+mv deploy.tar.gz deploy
+
+cd deploy
+tar xvzf deploy.tar.gz

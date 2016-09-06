@@ -1,13 +1,8 @@
 #!/bin/sh
+imagePrefix=deploy
 
-case $1 in
-	prod)
-		imagePrefix=deploy
-	;;
-
-	*)
-		imagePrefix=koderkavefeconf
-esac
+rm -rf ~/deploy
+mkdir ~/deploy
 
 # Stop Containers
 docker stop "$imagePrefix"_rp1_1
@@ -26,6 +21,3 @@ docker rmi "$imagePrefix"_rp1:latest
 docker rmi "$imagePrefix"_fe1:latest
 docker rmi "$imagePrefix"_fe2:latest
 docker rmi "$imagePrefix"_fe3:latest
-
-rm -rf ./sv/repo
-rm -rf ./sv/koderkave-fe
