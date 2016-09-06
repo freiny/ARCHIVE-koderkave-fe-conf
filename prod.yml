@@ -8,8 +8,8 @@ services:
 
     links:
       - fe1:fe1
-      # - fe2:fe2
-      # - fe3:fe3
+      - fe2:fe2
+      - fe3:fe3
     ports:
       - 80:80
 
@@ -20,16 +20,16 @@ services:
     ports:
       - 10001:10000
 
-  # fe2:
-  #   build:
-  #     context: ./sv
-  #     dockerfile: prod.Dockerfile
-  #   ports:
-  #     - 10002:10000
-  #
-  # fe3:
-  #   build:
-  #     context: ./sv
-  #     dockerfile: prod.Dockerfile
-  #   ports:
-  #     - 10003:10000
+  fe2:
+    build:
+      context: ./sv
+      dockerfile: prod.Dockerfile
+    ports:
+      - 10002:10000
+
+  fe3:
+    build:
+      context: ./sv
+      dockerfile: prod.Dockerfile
+    ports:
+      - 10003:10000
