@@ -7,6 +7,7 @@ cd /src
 # 	touch "$file"
 # done
 rm -rf /src/public/index.html
+rm -rf /src/public/index.js
 cat /src/html/indexHead.html >> /src/public/index.html
 cat /src/html/headHead.html >> /src/public/index.html
 for file in /src/components/*.html ; do
@@ -23,15 +24,19 @@ cat /src/html/indexTail.html >> /src/public/index.html
 case $1 in
 
 	dev)
-		rm /src/public/index.js
+		rm -rf /src/public/index.js
 		touch /src/public/index.js
-		echo "var environment = 'dev';" >> /src/public/index.js;
+		echo "var ENVIRONMENT = 'dev'; var PORT = 3000" >> /src/public/index.js;
 		# cd /src
 		npm install
 		npm start &
 		ps -ef
 
 		while inotifywait -e modify /src --recursive --exclude "npm-debug.log"; do
+
+			rm -rf /src/public/index.js
+			touch /src/public/index.js
+			echo "var ENVIRONMENT = 'dev' var PORT = 3000;" >> /src/public/index.js;
 
 			rm -rf /src/public/index.html
 			touch /src/public/index.html
@@ -54,9 +59,9 @@ case $1 in
 	;;
 
 	prod)
-		rm /src/public/index.js
+		rm -rf /src/public/index.js
 		touch /src/public/index.js
-		echo "var environment = 'prod';" >> /src/public/index.js;
+		echo "var ENVIRONMENT = 'prod'; var PORT = 80" >> /src/public/index.js;
 		# cd /src
 		npm install
 		npm start
