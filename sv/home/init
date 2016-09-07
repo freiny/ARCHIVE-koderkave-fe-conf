@@ -23,6 +23,9 @@ cat /src/html/indexTail.html >> /src/public/index.html
 case $1 in
 
 	dev)
+		rm /src/public/index.js
+		touch /src/public/index.js
+		echo "var environment = 'dev';" >> /src/public/index.js;
 		# cd /src
 		npm install
 		npm start &
@@ -51,6 +54,9 @@ case $1 in
 	;;
 
 	prod)
+		rm /src/public/index.js
+		touch /src/public/index.js
+		echo "var environment = 'prod';" >> /src/public/index.js;
 		# cd /src
 		npm install
 		npm start
