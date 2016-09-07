@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "[DEPLOY LOAD]"
 
 rm -rf deploy
 mkdir deploy

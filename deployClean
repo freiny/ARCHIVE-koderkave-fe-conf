@@ -1,8 +1,9 @@
 #!/bin/sh
+echo "[DEPLOY CLEAN]"
+
 imagePrefix=deploy
 
 rm -rf ~/deploy
-mkdir ~/deploy
 
 # Stop Containers
 docker stop "$imagePrefix"_rp1_1

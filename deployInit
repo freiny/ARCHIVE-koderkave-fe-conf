@@ -1,0 +1,41 @@
+#!/bin/sh
+
+if [ "$(whoami)" != "ec2-user" ]; then
+	# LOCAL SIDE
+
+	ip=ec2-user@$(ec2ip-koderkat-webapp)
+	keypair=$(ec2keypair-koderkat-webapp)
+	path=$(ec2path)
+
+	echo "[COPYING BASH CONFIG TO EC2 INSTANCE]"
+	scp -P 22 -i $keypair $path/home/.bashrc $ip:~/
+	scp -P 22 -i $keypair $path/home/.bash_profile $ip:~/
+
+	echo "[COPYING SCRIPTS TO EC2 INSTANCE]"
+	ssh -i $keypair $ip "mkdir ~/bin"
+	scp -P 22 -i $keypair ./deployInit $ip:~/bin/
+
+	echo "[LOGGING INTO EC2 INSTANCE]"
+	ssh -i $keypair $ip
+
+else
+	# REMOTE SIDE
+	echo "[UPDATING SOFTWARE ON EC2 INSTANCE]"
+	sudo yum update -y
+
+	echo "[INSTALLING GIT]"
+	sudo yum install git
+
+	echo "[INSTALLING DOCKER]"
+	sudo yum install -y docker
+	sudo service docker start
+	sudo usermod -a -G docker ec2-user
+	sudo systemctl start docker
+
+	echo "[INSTALLING DOCKER COMPOSE]"
+	curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+	sudo chown root docker-compose
+	sudo mv docker-compose /usr/local/bin
+	sudo chmod +x /usr/local/bin/docker-compose
+	echo "[INSTALLATION COMPLETE]"
+fi

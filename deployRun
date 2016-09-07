@@ -1,3 +1,5 @@
 #!/bin/sh
+echo "[DEPLOY RUN]"
+
 cd deploy
 docker-compose --file prod.yml up

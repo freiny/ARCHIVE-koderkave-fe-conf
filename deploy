@@ -1,2 +1,27 @@
 #!/bin/sh
-deployClean && deployLoad && deployRun
+#!/bin/sh
+
+if [ "$(whoami)" != "ec2-user" ]; then
+	# LOCAL SIDE
+
+	ip=ec2-user@$(ec2ip-koderkat-webapp)
+	keypair=$(ec2keypair-koderkat-webapp)
+	path=$(ec2path)
+
+	echo "[COPYING SCRIPTS TO EC2 INSTANCE]"
+	rm deploy.tar.gz
+	tar -czvf deploy.tar.gz ./
+
+	ssh -i $keypair $ip "mkdir ~/bin"
+	scp -P 22 -i $keypair ./deploy.tar.gz $ip:~/
+	scp -P 22 -i $keypair ./deployClean $ip:~/bin/
+	scp -P 22 -i $keypair ./deployLoad $ip:~/bin/
+	scp -P 22 -i $keypair ./deployRun $ip:~/bin/
+	scp -P 22 -i $keypair ./deploy $ip:~/bin/
+
+	echo "[LOGGING INTO EC2 INSTANCE]"
+	ssh -i $keypair $ip
+else
+	# REMOTE SIDE
+	deployClean && deployLoad && deployRun
+fi

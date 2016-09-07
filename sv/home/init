@@ -32,17 +32,17 @@ case $1 in
 
 			rm -rf /src/public/index.html
 			touch /src/public/index.html
-			cat /src/html/indexStart.html >> /src/public/index.html
-			cat /src/html/headStart.html >> /src/public/index.html
+			cat /src/html/indexHead.html >> /src/public/index.html
+			cat /src/html/headHead.html >> /src/public/index.html
 			for file in /src/components/*.html ; do
 				cat "$file" >> /src/public/index.html
 			done
-			cat /src/html/headEnd.html >> /src/public/index.html
-			cat /src/html/bodyStart.html >> /src/public/index.html
+			cat /src/html/headTail.html >> /src/public/index.html
+			cat /src/html/bodyHead.html >> /src/public/index.html
 			cat /src/html/app.html >> /src/public/index.html
 			cat /src/html/appjs.html >> /src/public/index.html
-			cat /src/html/bodyEnd.html >> /src/public/index.html
-			cat /src/html/indexEnd.html >> /src/public/index.html
+			cat /src/html/bodyTail.html >> /src/public/index.html
+			cat /src/html/indexTail.html >> /src/public/index.html
 
 			killall -9 node
 			npm start &
